@@ -58,12 +58,12 @@ h2 {
   border-color: #777;
 }
 
-.box.success:focus {
+.box.success :focus {
   border-color: #00ffff;
 }
 
-.box.error:focus {
-  border-color: red;
+.box.error :focus {
+  border-color: #a71717;
 }
 
 .box small {
