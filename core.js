@@ -1,8 +1,8 @@
 const form = document.getElementById('form')
 const uName = document.getElementById('name')
 const eMail = document.getElementById('email')
-const passone = document.getElementById('passone')
-const passtwo = document.getElementById('passtwo')
+const passone = document.getElementById('password')
+const passtwo = document.getElementById('password2')
 
 // for error messages
 
@@ -27,32 +27,24 @@ function emailValidation(eMail) {
   return td.test(String(eMail).toLocaleLowerCase())
 }
 
+//case fix
+function caseFix(input) {
+  return input.id.charAt(0).toUpperCase() + input.id.slice(1).toLowerCase()
+}
+
+//do basic checks
+function basicChecks(inputArr) {
+  inputArr.forEach(function (input) {
+    if (input.value.trim() === '') {
+      theError(input, `${caseFix(input)} is mandatory`)
+    } else {
+      theSuccess(input)
+    }
+  })
+}
+
 //event Listening function
 form.addEventListener('submit', function (e) {
   e.preventDefault()
-  if (uName.value === '') {
-    theError(uName, 'Username is madatory')
-  } else {
-    theSuccess(uName)
-  }
-
-  if (eMail.value === '') {
-    theError(eMail, 'Email is required')
-  } else if (!emailValidation(eMail.value)) {
-    theError(eMail, 'Email is not valid')
-  } else {
-    theSuccess(eMail)
-  }
-
-  if (passone.value === '') {
-    theError(passone, 'Enter a password')
-  } else {
-    theSuccess(passone)
-  }
-
-  if (passtwo.value === '') {
-    theError(passtwo, 're Enter the password')
-  } else {
-    theSuccess(passtwo)
-  }
+  basicChecks([uName, eMail, passone, passtwo])
 })
